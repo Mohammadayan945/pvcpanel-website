@@ -24,6 +24,16 @@ const strictLimiter = rateLimit({ windowMs: 60 * 60 * 1000, max: 10, message: { 
 
 app.use('/api/', apiLimiter);
 
+// ensure uploads folder exists
+const fs = require('fs');
+
+const uploadPath = path.join(__dirname, 'uploads');   // new path for uploads/////////////////
+
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+  console.log("📁 uploads folder created");
+}
+
 // ── Static Files (uploads) ──────────────────────
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
