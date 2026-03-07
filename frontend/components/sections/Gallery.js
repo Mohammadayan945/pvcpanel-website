@@ -70,7 +70,7 @@ export default function Gallery() {
               {images.map((img) => (
                 <div key={img.id} onClick={() => setLightbox(img)}
                   className="rounded-2xl overflow-hidden aspect-[4/3] relative group cursor-pointer">
-                  <img src={`${API_BASE}${img.image_url}`} alt={img.title}
+                  <img src={img.image_url?.startsWith("http") ? img.image_url : `${API_BASE}${img.image_url}`} alt={img.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <div>
@@ -96,7 +96,7 @@ export default function Gallery() {
                   <div key={vid.id} className="rounded-2xl overflow-hidden bg-white shadow-sm border border-gray-100">
                     <div className="aspect-video bg-black">
                       <video
-                        src={`${API_BASE}${vid.image_url}`}
+                        src={vid.image_url?.startsWith("http") ? vid.image_url : `${API_BASE}${vid.image_url}`}
                         controls
                         className="w-full h-full object-contain"
                         preload="metadata"
@@ -124,7 +124,7 @@ export default function Gallery() {
           <div className="max-w-4xl w-full relative" onClick={e => e.stopPropagation()}>
             <button onClick={() => setLightbox(null)}
               className="absolute -top-12 right-0 text-white/70 hover:text-white text-4xl font-light">×</button>
-            <img src={`${API_BASE}${lightbox.image_url}`} alt={lightbox.title}
+            <img src={lightbox.image_url?.startsWith("http") ? lightbox.image_url : `${API_BASE}${lightbox.image_url}`} alt={lightbox.title}
               className="w-full max-h-[80vh] object-contain rounded-2xl" />
             <div className="mt-4 text-center">
               <p className="text-white font-semibold text-lg">{lightbox.title}</p>

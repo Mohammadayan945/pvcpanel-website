@@ -109,7 +109,7 @@ export default function AdminGallery() {
                   {images.map(img => (
                     <div key={img.id} className="rounded-2xl overflow-hidden bg-white shadow-sm group relative">
                       <div className="aspect-[4/3] overflow-hidden">
-                        <img src={`${API_BASE}${img.image_url}`} alt={img.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                        <img src={img.image_url?.startsWith("http") ? img.image_url : `${API_BASE}${img.image_url}`} alt={img.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                       </div>
                       <div className="p-3">
                         <p className="text-navy font-semibold text-sm truncate">{img.title}</p>
@@ -134,7 +134,7 @@ export default function AdminGallery() {
                     <div key={vid.id} className="rounded-2xl overflow-hidden bg-white shadow-sm group relative">
                       <div className="aspect-video bg-black overflow-hidden">
                         <video
-                          src={`${API_BASE}${vid.image_url}`}
+                          src={vid.image_url?.startsWith("http") ? vid.image_url : `${API_BASE}${vid.image_url}`}
                           controls
                           className="w-full h-full object-contain"
                           preload="metadata"
