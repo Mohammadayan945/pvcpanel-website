@@ -4,12 +4,12 @@ const auth = require('../middleware/auth');
 
 router.get('/stats', auth, async (req, res) => {
   try {
-    const [[contacts]]   = await pool.query("SELECT COUNT(*) total, SUM(status='new') as new_count FROM contacts");
-    const [[quotes]]     = await pool.query("SELECT COUNT(*) total, SUM(status='pending') as pending_count, SUM(status='won') as won_count FROM quote_requests");
-    const [[gallery]]    = await pool.query('SELECT COUNT(*) total FROM gallery');
-    const [recentC]      = await pool.query('SELECT id,name,phone,service,status,created_at FROM contacts ORDER BY created_at DESC LIMIT 5');
-    const [recentQ]      = await pool.query('SELECT id,name,phone,service_type,status,created_at FROM quote_requests ORDER BY created_at DESC LIMIT 5');
-    const [byStatus]     = await pool.query('SELECT status, COUNT(*) as count FROM quote_requests GROUP BY status');
+    const [[contacts]] = await pool.query("SELECT COUNT(*) total, SUM(status='new') as new_count FROM contacts");
+    const [[quotes]]   = await pool.query("SELECT COUNT(*) total, SUM(status='pending') as pending_count, SUM(status='won') as won_count FROM quote_requests");
+    const [[gallery]]  = await pool.query('SELECT COUNT(*) total FROM gallery');
+    const [recentC]    = await pool.query('SELECT id,name,phone,status,created_at FROM contacts ORDER BY created_at DESC LIMIT 5');
+    const [recentQ]    = await pool.query('SELECT id,name,phone,service_type,status,created_at FROM quote_requests ORDER BY created_at DESC LIMIT 5');
+    const [byStatus]   = await pool.query('SELECT status, COUNT(*) as count FROM quote_requests GROUP BY status');
 
     res.json({
       stats: {
