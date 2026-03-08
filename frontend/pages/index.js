@@ -110,7 +110,7 @@ export default function Home() {
             <a href="#gallery" className="btn-outline text-base">View Our Work</a>
           </div>
           <div className="flex gap-12">
-            {[['500+','Projects Done'],['10+','Years Experience'],['98%','Client Satisfaction']].map(([n,l]) => (
+            {[[settings.stat_1_value||'50+', settings.stat_1_label||'Projects Done'],[settings.stat_2_value||'4+', settings.stat_2_label||'Years Experience'],[settings.stat_3_value||'98%', settings.stat_3_label||'Client Satisfaction']].map(([n,l]) => (
               <div key={l}><p className="font-serif text-3xl text-gold font-bold">{n}</p><p className="text-white/50 text-sm">{l}</p></div>
             ))}
           </div>
